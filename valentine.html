@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine ❤️</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(circle, #ff758f, #ff4d6d);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  /* 🌹 Rose petals */
+  .petal {
+    position: fixed;
+    top: -10px;
+    animation: fall linear infinite;
+    opacity: 0.9;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(110vh) rotate(360deg); }
+  }
+
+  /* 💓 Heartbeat */
+  @keyframes heartbeat {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.1); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+  }
+
+  .yes {
+    animation: heartbeat 1.2s infinite;
+  }
+
+  /* 😈 Shake punishment */
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+  }
+
+  .shake {
+    animation: shake 0.4s;
+  }
+
+  .card {
+    background: white;
+    width: 90%;
+    max-width: 450px;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    text-align: center;
+    z-index: 10;
+  }
+
+  h1, h2 {
+    color: #d62828;
+  }
+
+  p {
+    color: #444;
+    font-size: 15px;
+  }
+
+  .photos {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+    justify-content: center;
+  }
+
+  .photos img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 15px;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+  }
+
+  button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 30px;
+    background: #ff4d6d;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .final {
+    display: none;
+  }
+
+  .buttons {
+    margin-top: 20px;
+    position: relative;
+    height: 120px;
+  }
+
+  .no {
+    background: #adb5bd;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+</style>
+</head>
+
+<body>
+
+<!-- 🌹 Generate rose petals -->
+<script>
+  for (let i = 0; i < 25; i++) {
+    let petal = document.createElement("div");
+    petal.innerHTML = "🌹";
+    petal.className = "petal";
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.fontSize = 16 + Math.random() * 14 + "px";
+    petal.style.animationDuration = 5 + Math.random() * 5 + "s";
+    document.body.appendChild(petal);
+  }
+</script>
+
+<!-- 💌 FORM -->
+<div class="card" id="formCard">
+  <h1>Hey Shivam ❤️</h1>
+  <p>
+    Before I steal your heart forever,<br>
+    let’s see how well you know <b>Nikka</b> 😌
+  </p>
+
+  <div class="photos">
+    <img src="photo1.jpg">
+    <img src="photo2.jpg">
+    <img src="photo3.jpg">
+  </div>
+
+  <form onsubmit="goToFinal(event)">
+    <input placeholder="What do you love most about us?" required>
+    <input placeholder="One habit of mine you adore 😏" required>
+    <button type="submit">Continue 💌</button>
+  </form>
+</div>
+
+<!-- 😈 FINAL QUESTION -->
+<div class="card final" id="finalCard">
+  <h2>Shivam… ❤️</h2>
+  <p>You’re my favorite person, my calm, my chaos.</p>
+  <h2>Will you be my Valentine? 💘</h2>
+
+  <div class="buttons">
+    <button class="yes" onclick="yesClicked()">YES 😍</button>
+    <button class="no" id="noBtn" onmouseover="runAway()">No 🙄</button>
+  </div>
+</div>
+
+<script>
+  let yesCount = 0;
+
+  function goToFinal(e) {
+    e.preventDefault();
+    formCard.style.display = "none";
+    finalCard.style.display = "block";
+  }
+
+  function runAway() {
+    const btn = document.getElementById("noBtn");
+    btn.style.left = Math.random() * 250 + "px";
+    btn.style.top = Math.random() * 80 + "px";
+  }
+
+  function yesClicked() {
+    yesCount++;
+
+    if (yesCount === 1) {
+      alert("Are you REALLY sure? 😏");
+    } else if (yesCount === 2) {
+      alert("Last chance to escape 👀");
+    } else {
+      alert("Take a screenshot 📸\nThis is proof you’re mine now ❤️");
+      window.location.href = "love-letter.html";
+    }
+  }
+
+  document.getElementById("noBtn").onclick = function () {
+    document.body.classList.add("shake");
+    alert("Nice try.\nYou’re stuck with me 😈❤️");
+    document.body.classList.remove("shake");
+  };
+</script>
+
+</body>
+</html>
+
